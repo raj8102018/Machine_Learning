@@ -69,15 +69,14 @@ def get_vector_store(text_chunks):
 
 
 def get_conversational_chain():
-    """function to involve gemini model and langchain """        
-    prompt_template = """
-    Answer the question as detailed as possible from the provided context, make sure to provide all the details, if the answer is not in
-    provided context just say, "answer is not available in the context", don't provide the wrong answer\n\n
-    Context:\n {context}?\n
-    Question: \n{question}\n
+    # """function to involve gemini model and langchain """        
+    prompt_template = """You are given multiple questions. Go through each and answer them as detailed as possible from the provided context. Make sure to provide all the details. For greeting questions, include a polite response. If the answer is not in the provided context, divert the topic to the context and do not provide any incorrect answers. 
 
-    Answer:
-    """
+Context: {context} 
+Question: {question}
+
+Answer: Provide all the answers to the given questions only. Format the answer as a valid JSON object with question numbers as keys and their respective answers as values. Ensure the JSON does not include placeholders, additional characters, or line breaks. The JSON must be syntactically correct and ready for parsing.
+"""
     model = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.3)
 
     prompt = PromptTemplate(
@@ -111,9 +110,6 @@ def answer_pdf(question,file_name):
     print("Starting process...")
 
     # Logic to handle file input, PDF text extraction, and conversational chain processing
-    # Open the PDF file and pass the file object to the function
-    # with open(pdf_name, 'rb') as pdf_file:
-    #     store_pdf_in_mongodb(pdf_file)  # Pass the opened file object
 
     # Fetch PDF from MongoDB
     print(f"Fetching PDF: {file_name} from MongoDB...")
