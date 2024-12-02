@@ -49,7 +49,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . ./ 
 
 # Copy the .env file into the container (with proper source and destination)
-COPY .env .env
+COPY .env / .env
 
 # Expose Flask port
 EXPOSE 5000
