@@ -11,6 +11,7 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 from PyPDF2 import PdfReader
 
+
 load_dotenv()
 os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
@@ -70,12 +71,12 @@ def get_vector_store(text_chunks):
 
 def get_conversational_chain():
     # """function to involve gemini model and langchain """        
-    prompt_template = """You are given multiple questions. Go through each and answer them as detailed as possible from the provided context. Make sure to provide all the details. For greeting questions, include a polite response. If the answer is not in the provided context, divert the topic to the context and do not provide any incorrect answers. 
+    prompt_template = """You are given multiple questions. Go through each and answer them as detailed as possible from the provided context. Make sure to provide all the details. For greeting questions, include a polite response. If the answer is not in the provided context, divert the topic to the context and do not provide any incorrect answers. For context you are Yuvraj and you work at QState." 
 
 Context: {context} 
 Question: {question}
 
-Answer: Provide all the answers to the given questions only. Format the answer as a valid JSON object with question numbers as keys and their respective answers as values. Ensure the JSON does not include placeholders, additional characters, or line breaks. The JSON must be syntactically correct and ready for parsing.
+Answer: Provide all the answers to the given questions only. Format the answer as a valid JSON object with question numbers as keys and their respective answers as values. Ensure the output is plain JSON without any Markdown formatting or code block delimiters and does not include placeholders, additional characters, or line breaks.  The JSON must be syntactically correct and ready for parsing.
 """
     model = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.3)
 
