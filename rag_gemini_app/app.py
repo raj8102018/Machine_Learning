@@ -1,4 +1,4 @@
-"""This module contains the API functionality"""
+"""This module contains the API functionality for the RAG system"""
 from flask import Flask, request, jsonify
 from rag_app import answer_pdf
 
